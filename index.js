@@ -21,11 +21,24 @@ app.get('/cadastro', (req, res) => {
 
 app.post('/pessoaCadastrada', (req, res) => {
   var nome = req.body.Inome
+  var sobrenome = req.body.Isobrenome
   var email = req.body.Iemail
+  var data = req.body.Idata
+  var telefone = req.body.Iphone
+  var estado = req.body.Istate
+  var username = req.body.Iusername
+  var senha = req.body.Ipassword
+
   console.log('Cadastro efetuado com sucesso')
   model.create({
     nome: nome,
-    email: email
+    email: email,
+    sobrenome: sobrenome,
+    data: data,
+    telefone: telefone,
+    estado: estado,
+    username: username,
+    senha: senha
   })
   res.send(nome)
 })
