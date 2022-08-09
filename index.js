@@ -4,6 +4,7 @@ const bodyParser = require('body-parser') //trabalha com os dados vindos dos cli
 const Sequelize = require('sequelize')
 const connection = require('./database/database')
 const model = require('./database/model1')
+const model2 = require('./database/model2')
 
 app.use(bodyParser.urlencoded({ extended: false })) //evita que utilizem campos encadeados
 app.use(bodyParser.json())
@@ -17,6 +18,12 @@ app.get('/', (req, res) => {
 
 app.get('/cadastro', (req, res) => {
   res.render('cadastro')
+})
+
+app.get('/consulta', (req, res) => {
+  var nome = 'nomezinho'
+
+  res.render('consulta', { nome: nome })
 })
 
 app.post('/pessoaCadastrada', (req, res) => {
