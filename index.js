@@ -5,6 +5,7 @@ const Sequelize = require('sequelize')
 const connection = require('./database/database')
 const model = require('./database/model1')
 const model2 = require('./database/model2')
+const { raw } = require('body-parser')
 
 app.use(bodyParser.urlencoded({ extended: false })) //evita que utilizem campos encadeados
 app.use(bodyParser.json())
@@ -21,9 +22,16 @@ app.get('/cadastro', (req, res) => {
 })
 
 app.get('/consulta', (req, res) => {
-  var nome = 'nomezinho'
+  var varId = '2'
 
-  res.render('consulta', { nome: nome })
+  model.findOne({ where: { id: varId } }).then(item => {
+    if (item != undefined) {
+      console.log(item.dataValues.nome)
+      res.render('consulta', { variavel: item })
+    } else {
+      res.redirect('/')
+    }
+  })
 })
 
 app.post('/pessoaCadastrada', (req, res) => {
