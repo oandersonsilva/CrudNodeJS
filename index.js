@@ -17,17 +17,25 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/cadastro', (req, res) => {
-  res.render('cadastro')
+app.get('/cadastroPessoas', (req, res) => {
+  res.render('cadastroPessoas')
 })
 
-app.get('/consulta', (req, res) => {
+app.get('/cadastroProdutos', (req, res) => {
+  res.render('cadastroProdutos')
+})
+
+app.get('/consultaProdutos', (req, res) => {
+  res.render('consultaProdutos')
+})
+
+app.get('/consultaPessoas', (req, res) => {
   var varId = '2'
 
   model.findOne({ where: { id: varId } }).then(item => {
     if (item != undefined) {
       console.log(item.dataValues.nome)
-      res.render('consulta', { variavel: item })
+      res.render('consultaPessoas', { variavel: item })
     } else {
       res.redirect('/')
     }
