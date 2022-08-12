@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
+<html lang="pt-br">
+  <%- include('./partials/head') %>
+  <body>
+    <%- include('./partials/navbar') %>
+    <div class="container">
+      <form action="/cadastroProdutos" method="post">
+        <div class="form-body">
+          <h2>cadastro Produtos</h2>
+        </div>
+        <div class="form-footer">
+          <label for="Idescricao">Descrição*</label>
+          <input type="text" name="Idescricao" class="form-control" />
+          <br />
+          <label for="Ivalor">Preço*</label>
+          <input type="text" name="Ivalor" class="form-control" />
+          <button class="btn btn-success" type="submit">Cadastrar</button>
+          <br />
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <%- include('./partials/footer') %>
 </html>

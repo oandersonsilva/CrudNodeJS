@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const connection = require('./database')
 
-const modelPrincipal = connection.define('principal2', {
+const modelPrincipal = connection.define('principal', {
   nome: {
     type: Sequelize.STRING,
     allowNULL: false

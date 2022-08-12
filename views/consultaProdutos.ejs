@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include('./partials/head') %>
+  <body>
+    <%- include('./partials/navbar') %> <% item.forEach( x => { %>
+    <h2><%= x.descricao %></h2>
+    <% }) %>
+  </body>
+  <%- include('./partials/footer') %>
+</html>
