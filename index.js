@@ -34,7 +34,7 @@ app.get('/consultaProdutos', (req, res) => {
 })
 
 app.get('/consultaPessoas', (req, res) => {
-  var varId = '2'
+  var varId = '4'
 
   modelCPessoas.findOne({ where: { id: varId } }).then(item => {
     if (item != undefined) {
