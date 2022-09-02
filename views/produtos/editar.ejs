@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include('../partials/head') %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container">
+      <form action="/updateProdutos" method="post">
+        <div class="form-body">
+          <h2>Editar Produtos</h2>
+        </div>
+        <div class="form-footer">
+          <label for="Idescricao">Descrição*</label>
+          <input
+            type="text"
+            name="Idescricao"
+            class="form-control"
+            value="<%= item.descricao %>"
+          />
+          <br />
+          <label for="Ivalor">Preço*</label>
+          <input
+            type="text"
+            name="Ivalor"
+            class="form-control"
+            value="<%= item.valor %>"
+          />
+          <br />
+          <input type="hidden" name="id" value="<%=item.id%>" />
+          <button class="btn btn-success" type="submit">Atualizar</button>
+          <br />
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <%- include('../partials/footer') %>
+</html>

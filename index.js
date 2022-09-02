@@ -15,35 +15,81 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/cadastroPessoas', (req, res) => {
-  res.render('cadastroPessoas')
+app.get('/pessoas/cadastro', (req, res) => {
+  res.render('./pessoas/cadastro')
 })
 
-app.get('/cadastroProdutos', (req, res) => {
-  res.render('cadastroProdutos')
+app.get('/produtos/cadastro', (req, res) => {
+  res.render('./produtos/cadastro')
 })
 
-app.get('/consultaProdutos', (req, res) => {
-  var id = '2'
-  modelCProdutos.findAll({ raw: true }).then(item => {
-    console.log(item)
-    res.render('consultaProdutos', {
-      item: item
-    })
+app.get('/produtos/consulta', (req, res) => {
+  var item = []
+  res.render('./produtos/consulta', { item: item })
+})
+
+app.post('/produtos/consulta', (req, res) => {
+  var descricao = req.body.descricao
+  modelCProdutos.findOne({ where: { descricao: descricao } }).then(item => {
+    if (item != undefined) {
+      res.render('./produtos/consulta', {
+        item: item
+      })
+    }
   })
 })
 
-app.get('/consultaPessoas', (req, res) => {
+app.get('/produtos/consultaAll', (req, res) => {
+  modelCProdutos.findAll({ raw: true, order: ['valor'] }).then(vetor => {
+    res.render('./produtos/consultaAll', { item: vetor })
+  })
+})
+
+app.get('/pessoas/consulta', (req, res) => {
   var varId = '4'
 
   modelCPessoas.findOne({ where: { id: varId } }).then(item => {
     if (item != undefined) {
       console.log(item.dataValues.nome)
-      res.render('consultaPessoas', { variavel: item })
+      res.render('./pessoas/consulta', { variavel: item })
     } else {
       res.redirect('/')
     }
   })
+})
+
+app.post('/deletarProdutos', (req, res) => {
+  var id = req.body.id
+  modelCProdutos.destroy({ where: { id: id } }).then(() => {
+    res.redirect('/produtos/consultaAll')
+  })
+})
+
+app.get('/produtos/editar/:id', (req, res) => {
+  var id = req.params.id
+  modelCProdutos.findOne({ where: { id: id } }).then(item => {
+    res.render('./produtos/editar', { item: item })
+  })
+})
+
+app.post('/updateProdutos', (req, res) => {
+  var id = req.body.id
+  var descricao = req.body.Idescricao
+  var valor = req.body.Ivalor
+  console.log(`${id}, ${descricao}, e ${valor} `)
+  modelCProdutos
+    .update(
+      {
+        descricao: descricao,
+        valor: valor
+      },
+      {
+        where: { id: id }
+      }
+    )
+    .then(() => {
+      res.redirect('/produtos/consultaAll')
+    })
 })
 
 app.post('/pessoaCadastrada', (req, res) => {

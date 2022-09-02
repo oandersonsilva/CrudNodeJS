@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include('../partials/head') %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container">
+      <br />
+      <table class="table table-striped">
+        <tr class="table-primary">
+          <td>Descricao</td>
+          <td>Valor</td>
+          <td>Ações</td>
+        </tr>
+        <% item.forEach(item=>{ %>
+        <tr>
+          <td><%= item.descricao %></td>
+          <td><%= item.valor %></td>
+          <td>
+            <a href="editar/<%=item.id%>" class="btn btn-warning">Editar</a>
+            <form
+              action="/deletarProdutos"
+              method="post"
+              style="display: inline"
+              ossubmit="confirmation(event)"
+            >
+              <input type="hidden" value="<%= item.id %>" name="id" />
+              <button class="btn btn-danger">Deletar</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+  </body>
+  <%- include('../partials/footer') %>
+
+  <script>
+    function confirmation(event) {}
+  </script>
+</html>

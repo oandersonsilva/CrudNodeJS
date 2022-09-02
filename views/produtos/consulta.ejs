@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include('../partials/head') %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container">
+      <br />
+      <form action="/produtos/consulta" method="post">
+        <label for="descricao">Descrição do Produto</label>
+        <br />
+        <input type="text" name="descricao" class="form-control" />
+        <br />
+        <button class="btn btn-secondary">Consultar</button>
+      </form>
+
+      <br />
+      <table class="table table-striped">
+        <tr class="table-primary">
+          <td>Descricao</td>
+          <td>Valor</td>
+          <td>Ação</td>
+        </tr>
+
+        <tr>
+          <td><%= item.descricao %></td>
+          <td><%= item.valor %></td>
+          <td>
+            <input type="hidden" name="id" value="<%= item.id %>" />
+            <a href="/produtos/editar/<%=item.id%>" class="btn btn-warning"
+              >Editar</a
+            >
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <%- include('../partials/footer') %>
+</html>
