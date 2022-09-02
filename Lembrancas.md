@@ -232,3 +232,5 @@ res.redirect('/')
 })
 
 //Model de resposta
+
+//edição pelo celular
