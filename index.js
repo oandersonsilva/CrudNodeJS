@@ -46,11 +46,10 @@ app.get('/produtos/consultaAll', (req, res) => {
 })
 
 app.get('/pessoas/consulta', (req, res) => {
-  var varId = '4'
+  var varId = '1'
 
-  modelCPessoas.findOne({ where: { id: varId } }).then(item => {
+  modelCPessoas.findAll({ raw: true }).then(item => {
     if (item != undefined) {
-      console.log(item.dataValues.nome)
       res.render('./pessoas/consulta', { variavel: item })
     } else {
       res.redirect('/')
@@ -125,6 +124,19 @@ app.post('/cadastroProdutos', (req, res) => {
   })
   console.log('cadastrado com sucesso')
   res.redirect('/')
+})
+
+app.post('/deletarPessoa', (req, res) => {
+  var id = req.body.id
+  modelCPessoas
+    .destroy({
+      where: {
+        id: id
+      }
+    })
+    .then(() => {
+      res.redirect('./pessoas/consulta')
+    })
 })
 
 app.listen(port)

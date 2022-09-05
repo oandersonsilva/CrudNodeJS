@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <%- include('../partials/head.ejs')  %>
 <body>
-  <%- include('../partials/navbar.ejs')  %>
-  <h1>Consulta</h1>
-
- 
-    <p> <%= variavel.dataValues.nome %> </p>
-    <p> <%= variavel.dataValues.username %> </p>
- 
+  
+  <div class="container">
+    <table class="table table-striped">
+      <tr class="table-primary">
+        <th>NOME</th>
+        <th>EMAIL</th>
+        <th>USERNAME</th>
+        <th>AÇÕES</th>
+      </tr>
+      <%- include('../partials/navbar.ejs')  %>
+      <h1>Consulta</h1>
+      <% variavel.forEach(variavel => { %>
+      <tr>
+        <th> <%= variavel.nome %></th>
+        <th> <%= variavel.email %></th>
+        <th> <%= variavel.username %></th>
+        <th> 
+          <a href="editarPessoa/<%= variavel.id %>" class="btn btn-warning">EDITAR</a>
+          <form action="/deletarPessoa" method="post" style="display: inline;">
+            <input type="hidden" value="<%= variavel.id %>" name="id">
+            <button class="btn btn-danger">DELETAR</button>
+          </form>
+        </th>
+  
+      </tr>
    
+<% }) %>
+ 
+</table>
+</div>
+
 
 </body>
 <%- include('../partials/footer.ejs')  %>
