@@ -57,6 +57,49 @@ app.get('/pessoas/consulta', (req, res) => {
   })
 })
 
+app.post('/editarPessoa', (req, res) => {
+  var id = req.body.id
+  var nome = req.body.Inome
+  var sobrenome = req.body.Isobrenome
+  var data = req.body.Idata
+  var telefone = req.body.Iphone
+  var estado = req.body.Istate
+  var username = req.body.Iusername
+
+  modelCPessoas
+    .update(
+      {
+        nome: nome,
+        sobrenome: sobrenome,
+        data: data,
+        telefone: telefone,
+        estado: estado,
+        usename: username
+      },
+      { where: { id: id } }
+    )
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+app.get('/pessoas/editarPessoa/:id', (req, res) => {
+  var id = req.params.id
+  modelCPessoas.findOne({ where: { id: id } }).then(index => {
+    var newDate =
+      index.data.getDate() +
+      '/' +
+      (index.data.getMonth() + 1) +
+      '/' +
+      index.data.getFullYear()
+    console.log(newDate + '    ' + index.data)
+    res.render('./pessoas/editar', { variavel: index, newDate: newDate })
+  })
+})
+
 app.post('/deletarProdutos', (req, res) => {
   var id = req.body.id
   modelCProdutos.destroy({ where: { id: id } }).then(() => {

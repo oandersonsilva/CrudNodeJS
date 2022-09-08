@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include('../partials/head')%>
+  <body>
+    <%- include('../partials/navbar') %>
+
+    <div class="container">
+      <form method="post" action="/editarPessoa">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-footer">
+              <h2>formulário</h2>
+            </div>
+            <div class="form-body">
+              <div class="row">
+                <div class="col">
+                  <label for="Inome">Nome *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="Inome"
+                    value="<%= variavel.nome %>"
+                  />
+                </div>
+
+                <div class="col">
+                  <label for="Isobrenome">Sobrenome</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="Isobrenome"
+                    value="<%= variavel.sobrenome %>"
+                  />
+                </div>
+              </div>
+
+              <label for="Idata">Data de Nascimento</label>
+              <input
+                type="date"
+                id="Idata"
+                class="form-control"
+                name="Idata"
+                value="<%= newDate %>"
+              />
+
+              <label for="Iphone">Telefone</label>
+              <input
+                type="text"
+                class="form-control"
+                data-mask="(00)00000-0000"
+                data-mask-selectonfocus="true"
+                name="Iphone"
+                value="<%= variavel.telefone %>"
+              />
+
+              <label for="IdataList">Estado</label>
+              <input
+                class="form-control"
+                list="dataListOptions"
+                id="exampleDataList"
+                placeholder="Estado"
+                name="Istate"
+                value="<%= variavel.estado %>"
+              />
+              <datalist id="dataListOptions">
+                <option value="São Paulo">Paulista</option>
+                <option value="Rio de Janeiro">Carioca</option>
+                <option value="Bahia">Baiano</option>
+                <option value="Espirito Santo">Capixaba</option>
+              </datalist>
+
+              <label for="">Username *</label>
+              <input
+                type="text"
+                class="form-control"
+                name="Iusername"
+                value="<%= variavel.username %>"
+              />
+              <input type="hidden" name="id" value="<%= variavel.id %>" />
+
+              <button type="submit" class="btn btn-outline-primary">
+                Atualizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script type="text/javascript"></script>
+  </body>
+
+  <%- include('../partials/footer') %>
+</html>
