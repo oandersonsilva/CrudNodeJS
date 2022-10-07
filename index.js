@@ -4,9 +4,16 @@ const bodyParser = require('body-parser') //trabalha com os dados vindos dos cli
 const modelCPessoas = require('./database/modelCPessoas')
 const modelCProdutos = require('./database/modelCProdutos')
 const { raw } = require('body-parser')
+const session = require('express-session')
 
 app.use(bodyParser.urlencoded({ extended: false })) //evita que utilizem campos encadeados
 app.use(bodyParser.json())
+app.use(
+  session({
+    secret: 'asdga skdjaçsdjhaçsjhd',
+    cookie: { maxAge: 3000000 }
+  })
+)
 
 port = 3000
 app.use(express.static('public'))
@@ -182,6 +189,30 @@ app.post('/deletarPessoa', (req, res) => {
     })
 })
 
+app.get('/sessao', (req, res) => {
+  req.session.nome = 'José Henrique'
+  res.send('json criado')
+})
+
+app.get('/resultado', (req, res) => {
+  res.json({
+    nome: req.session.nome
+  })
+})
+
+app.get('/logoff', (req, res) => {
+  req.session.nome = undefined
+  res.send('Logoff Realizado')
+})
+
+app.get('/plataforma', (req, res) => {
+  if (req.session.nome == undefined) {
+    res.send('Faça login')
+  } else {
+    res.send('Bem vindo à Plataforma')
+  }
+})
+
 app.listen(port)
 
-console.log('app Rodando')
+console.log('app Rodando na porta ' + port)
