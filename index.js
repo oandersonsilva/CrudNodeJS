@@ -46,6 +46,10 @@ app.post('/produtos/consulta', (req, res) => {
   })
 })
 
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+
 app.get('/produtos/consultaAll', (req, res) => {
   modelCProdutos.findAll({ raw: true, order: ['valor'] }).then(vetor => {
     res.render('./produtos/consultaAll', { item: vetor })

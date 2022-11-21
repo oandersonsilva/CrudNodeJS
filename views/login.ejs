@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include('./partials/head') %>
+  <body>
+    <%- include('./partials/navbar')%>
+    <br />
+    <div class="container">
+      <div class="login">
+        <form action="/logando" method="post">
+          <input type="text" class="form-control" placeholder="Username" />
+          <br />
+          <input type="password" class="form-control" placeholder="Password" />
+          <br />
+          <button class="btn btn-success">Login</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <%- include('./partials/footer') %>
+</html>
