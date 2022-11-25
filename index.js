@@ -18,8 +18,13 @@ app.use(
 port = 3000
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
+
 app.get('/', (req, res) => {
-  res.render('index')
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+  res.render('index', { UsernamePag: username })
 })
 
 app.get('/pessoas/cadastro', (req, res) => {
@@ -46,8 +51,24 @@ app.post('/produtos/consulta', (req, res) => {
   })
 })
 
+//Sessão de login
+
 app.get('/login', (req, res) => {
-  res.render('login')
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+  res.render('login', { UsernamePag: username })
+})
+
+app.post('/logando', (req, res) => {
+  req.session.nome = req.body.Iusername
+  res.redirect('/login')
+})
+
+app.get('/logoff', (req, res) => {
+  req.session.nome = undefined
+  res.redirect('/login')
 })
 
 app.get('/produtos/consultaAll', (req, res) => {
@@ -204,7 +225,7 @@ app.get('/resultado', (req, res) => {
   })
 })
 
-app.get('/logoff', (req, res) => {
+app.get('/logoffandp', (req, res) => {
   req.session.nome = undefined
   res.send('Logoff Realizado')
 })

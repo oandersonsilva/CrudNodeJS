@@ -7,11 +7,20 @@
     <div class="container">
       <div class="login">
         <form action="/logando" method="post">
-          <input type="text" class="form-control" placeholder="Username" />
+          <input
+            name="Iusername"
+            type="text"
+            class="form-control"
+            placeholder="Username"
+          />
           <br />
           <input type="password" class="form-control" placeholder="Password" />
           <br />
           <button class="btn btn-success">Login</button>
+        </form>
+
+        <form action="/logoff" method="get">
+          <button class="btn btn-warning">Logoff</button>
         </form>
       </div>
     </div>
