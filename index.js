@@ -28,27 +28,47 @@ app.get('/', (req, res) => {
 })
 
 app.get('/pessoas/cadastro', (req, res) => {
-  res.render('./pessoas/cadastro')
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+  res.render('./pessoas/cadastro', { UsernamePag: username })
 })
 
 app.get('/produtos/cadastro', (req, res) => {
-  res.render('./produtos/cadastro')
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+  res.render('./produtos/cadastro', { UsernamePag: username })
 })
 
 app.get('/produtos/consulta', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+
   var item = []
-  res.render('./produtos/consulta', { item: item })
+  res.render('./produtos/consulta', { item: item, UsernamePag: username })
 })
 
 app.post('/produtos/consulta', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+
   var descricao = req.body.descricao
-  modelCProdutos.findOne({ where: { descricao: descricao } }).then(item => {
-    if (item != undefined) {
-      res.render('./produtos/consulta', {
-        item: item
-      })
-    }
-  })
+  modelCProdutos
+    .findOne({ where: { descricao: descricao, UsernamePag: username } })
+    .then(item => {
+      if (item != undefined) {
+        res.render('./produtos/consulta', {
+          item: item
+        })
+      }
+    })
 })
 
 //Sessão de login
@@ -72,17 +92,30 @@ app.get('/logoff', (req, res) => {
 })
 
 app.get('/produtos/consultaAll', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+
   modelCProdutos.findAll({ raw: true, order: ['valor'] }).then(vetor => {
-    res.render('./produtos/consultaAll', { item: vetor })
+    res.render('./produtos/consultaAll', { item: vetor, UsernamePag: username })
   })
 })
 
 app.get('/pessoas/consulta', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+
   var varId = '1'
 
   modelCPessoas.findAll({ raw: true }).then(item => {
     if (item != undefined) {
-      res.render('./pessoas/consulta', { variavel: item })
+      res.render('./pessoas/consulta', {
+        variavel: item,
+        UsernamePag: username
+      })
     } else {
       res.redirect('/')
     }
@@ -119,6 +152,11 @@ app.post('/editarPessoa', (req, res) => {
 })
 
 app.get('/pessoas/editarPessoa/:id', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+
   var id = req.params.id
   modelCPessoas.findOne({ where: { id: id } }).then(index => {
     var newDate =
@@ -128,7 +166,11 @@ app.get('/pessoas/editarPessoa/:id', (req, res) => {
       '/' +
       index.data.getFullYear()
     console.log(newDate + '    ' + index.data)
-    res.render('./pessoas/editar', { variavel: index, newDate: newDate })
+    res.render('./pessoas/editar', {
+      variavel: index,
+      newDate: newDate,
+      UsernamePag: username
+    })
   })
 })
 
@@ -140,9 +182,14 @@ app.post('/deletarProdutos', (req, res) => {
 })
 
 app.get('/produtos/editar/:id', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+
   var id = req.params.id
   modelCProdutos.findOne({ where: { id: id } }).then(item => {
-    res.render('./produtos/editar', { item: item })
+    res.render('./produtos/editar', { item: item, UsernamePag: username })
   })
 })
 
