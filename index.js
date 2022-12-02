@@ -60,15 +60,15 @@ app.post('/produtos/consulta', (req, res) => {
   }
 
   var descricao = req.body.descricao
-  modelCProdutos
-    .findOne({ where: { descricao: descricao, UsernamePag: username } })
-    .then(item => {
-      if (item != undefined) {
-        res.render('./produtos/consulta', {
-          item: item
-        })
-      }
-    })
+  modelCProdutos.findOne({ where: { descricao: descricao } }).then(item => {
+    if (item != undefined) {
+      res.render('./produtos/consulta', {
+        item: item,
+        UsernamePag: username
+      })
+    } else {
+    }
+  })
 })
 
 //Sessão de login
