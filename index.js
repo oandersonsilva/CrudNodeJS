@@ -5,6 +5,7 @@ const modelCPessoas = require('./database/modelCPessoas')
 const modelCProdutos = require('./database/modelCProdutos')
 const { raw } = require('body-parser')
 const session = require('express-session')
+const loginAuth = require('./middlewares/loginAuth')
 
 app.use(bodyParser.urlencoded({ extended: false })) //evita que utilizem campos encadeados
 app.use(bodyParser.json())
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
   res.render('index', { UsernamePag: username })
 })
 
-app.get('/pessoas/cadastro', (req, res) => {
+app.get('/pessoas/cadastro', loginAuth, (req, res) => {
   var username = ''
   if (req.session.nome) {
     username = req.session.nome
@@ -35,7 +36,7 @@ app.get('/pessoas/cadastro', (req, res) => {
   res.render('./pessoas/cadastro', { UsernamePag: username })
 })
 
-app.get('/produtos/cadastro', (req, res) => {
+app.get('/produtos/cadastro', loginAuth, (req, res) => {
   var username = ''
   if (req.session.nome) {
     username = req.session.nome
@@ -83,7 +84,7 @@ app.get('/login', (req, res) => {
 
 app.post('/logando', (req, res) => {
   req.session.nome = req.body.Iusername
-  res.redirect('/login')
+  res.redirect('/')
 })
 
 app.get('/logoff', (req, res) => {
