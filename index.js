@@ -6,6 +6,7 @@ const modelCProdutos = require('./database/modelCProdutos')
 const { raw } = require('body-parser')
 const session = require('express-session')
 const loginAuth = require('./middlewares/loginAuth')
+const bcrypt = require('bcryptjs')
 
 app.use(bodyParser.urlencoded({ extended: false })) //evita que utilizem campos encadeados
 app.use(bodyParser.json())
@@ -241,8 +242,10 @@ app.post('/pessoaCadastrada', (req, res) => {
 app.post('/cadastroProdutos', (req, res) => {
   const descricao = req.body.Idescricao
   const valor = req.body.Ivalor
+  var salt = bcrypt.genSaltSync(10)
+  var hash = bcrypt.hashSync(descricao, salt)
   modelCProdutos.create({
-    descricao: descricao,
+    descricao: hash,
     valor: valor
   })
   console.log('cadastrado com sucesso')
