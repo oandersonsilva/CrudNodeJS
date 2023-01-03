@@ -242,8 +242,7 @@ app.post('/pessoaCadastrada', (req, res) => {
 app.post('/cadastroProdutos', (req, res) => {
   const descricao = req.body.Idescricao
   const valor = req.body.Ivalor
-  var salt = bcrypt.genSaltSync(10)
-  var hash = bcrypt.hashSync(descricao, salt)
+
   modelCProdutos.create({
     descricao: hash,
     valor: valor
@@ -287,6 +286,12 @@ app.get('/plataforma', (req, res) => {
   } else {
     res.send('Bem vindo à Plataforma')
   }
+})
+
+//Unidades
+
+app.get('/unidades/consulta', (req, res) => {
+  res.render('./unidades/consulta')
 })
 
 app.listen(port)
