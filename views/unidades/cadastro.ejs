@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <%- include ('../partials/head') %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container">
+      <div class="card">
+        <div class="card-head">
+          <h1>Consulta de Unidades</h1>
+        </div>
+        <div class="form-body">
+          <form action="/cadastrarUnidade" method="post">
+            <input
+              id="Ilocal"
+              type="text"
+              class="form-control"
+              placeholder="Digite o local"
+              name="Ilocal"
+            />
+            <br />
+            <input
+              id="InumFunc"
+              type="text"
+              class="form-control"
+              placeholder="Digite o numero de funcionarios"
+              name="InumFunc"
+            />
+            <br />
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,12 +1,13 @@
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser') //trabalha com os dados vindos dos clientes raves do form e os transforma em objeto JS dentro do Req.body
+const bodyParser = require('body-parser') //trabalha com os dados vindos dos clientes atraves do form e os transforma em objeto JS dentro do Req.body
 const modelCPessoas = require('./database/modelCPessoas')
 const modelCProdutos = require('./database/modelCProdutos')
-const { raw } = require('body-parser')
+
 const session = require('express-session')
 const loginAuth = require('./middlewares/loginAuth')
 const bcrypt = require('bcryptjs')
+const modelUnidades = require('./database/modelUnidades')
 
 app.use(bodyParser.urlencoded({ extended: false })) //evita que utilizem campos encadeados
 app.use(bodyParser.json())
@@ -243,6 +244,8 @@ app.post('/cadastroProdutos', (req, res) => {
   const descricao = req.body.Idescricao
   const valor = req.body.Ivalor
 
+  console.log(requi)
+
   modelCProdutos.create({
     descricao: hash,
     valor: valor
@@ -291,7 +294,29 @@ app.get('/plataforma', (req, res) => {
 //Unidades
 
 app.get('/unidades/consulta', (req, res) => {
-  res.render('./unidades/consulta')
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+  res.render('./unidades/consulta', { UsernamePag: username })
+})
+
+app.get('/unidades/cadastro', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+  res.render('./unidades/cadastro', { UsernamePag: username })
+})
+
+// cadastro Unidade
+
+app.post('/cadastrarUnidade', (req, res) => {
+  const local = req.body.Ilocal
+  const numFunc = req.body.InumFunc
+
+  modelUnidades.create({ local: local, numeroFuncionarios: numFunc })
+  res.redirect('/')
 })
 
 app.listen(port)
