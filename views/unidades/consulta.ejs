@@ -4,19 +4,26 @@
   <body>
     <%- include('../partials/navbar') %>
     <div class="form-control">
-      <h1>Cadastro de Unidades</h1>
+      <h1>Consulta de Unidades</h1>
+      <% items.forEach(item =>{ %>
+      <div class="table-striped">
+        <table class="table-striped">
+          <tr>
+            <td><%= item.local %></td>
+            <td><%= item.numeroFuncionarios %></td>
+            <td>
+              <a href="/unidades/editar"
+                ><button class="btn btn-warning">editar</button></a
+              >
+            </td>
+            <td>
+              <a href="/"><button class="btn btn-danger">deletar</button></a>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-      <form action="/cadastrarUnidade" method="post" class="form-control">
-        <input type="text" class="form-control" placeholder="Digite o local" />
-        <br />
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Digite o numero de funcionarios"
-        />
-        <br />
-        <button class="btn btn-success">Cadastrar</button>
-      </form>
+      <% })%>
     </div>
   </body>
 </html>

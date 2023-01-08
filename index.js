@@ -298,7 +298,10 @@ app.get('/unidades/consulta', (req, res) => {
   if (req.session.nome) {
     username = req.session.nome
   }
-  res.render('./unidades/consulta', { UsernamePag: username })
+
+  modelUnidades.findAll().then(data => {
+    res.render('./unidades/consulta', { UsernamePag: username, items: data })
+  })
 })
 
 app.get('/unidades/cadastro', (req, res) => {
@@ -318,6 +321,17 @@ app.post('/cadastrarUnidade', (req, res) => {
   modelUnidades.create({ local: local, numeroFuncionarios: numFunc })
   res.redirect('/')
 })
+
+// editar Unidade
+app.get('/unidades/editar', (req, res) => {
+  var username = ''
+  if (req.session.nome) {
+    username = req.session.nome
+  }
+  res.render('./unidades/editar', { UsernamePag: username })
+})
+
+//deletar unidade
 
 app.listen(port)
 
