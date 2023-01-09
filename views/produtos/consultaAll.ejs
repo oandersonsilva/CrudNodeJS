@@ -21,7 +21,7 @@
               action="/deletarProdutos"
               method="post"
               style="display: inline"
-              ossubmit="confirmation(event)"
+              onclick="confirmation(event, this)"
             >
               <input type="hidden" value="<%= item.id %>" name="id" />
               <button class="btn btn-danger">Deletar</button>
@@ -35,6 +35,13 @@
   <%- include('../partials/footer') %>
 
   <script>
-    function confirmation(event) {}
+    function confirmation(e, form) {
+      e.preventDefault()
+      console.log(e)
+      var decision = confirm('Tem certeza?')
+      if (decision) {
+        form.submit()
+      }
+    }
   </script>
 </html>

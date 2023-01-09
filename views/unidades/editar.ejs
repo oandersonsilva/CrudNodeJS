@@ -9,12 +9,13 @@
           <h1>Editar Unidade</h1>
         </div>
         <div class="form-body">
-          <form action="/cadastrarUnidade" method="post">
+          <form action="/editarUnidade" method="post">
             <input
               type="text"
               class="form-control"
               placeholder="Digite o local"
               name="Ilocal"
+              value="<%= item.local %>"
             />
             <br />
             <input
@@ -22,9 +23,11 @@
               class="form-control"
               placeholder="Digite o numero de funcionarios"
               name="InumFunc"
+              value="<%= item.numeroFuncionarios %> "
             />
             <br />
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <input name="Iid" type="text" value="<%=item.id %>" hidden />
+            <button type="submit" class="btn btn-success">Atualizar</button>
           </form>
         </div>
       </div>

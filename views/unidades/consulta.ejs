@@ -3,27 +3,38 @@
   <%- include ('../partials/head') %>
   <body>
     <%- include('../partials/navbar') %>
-    <div class="form-control">
+    <div class="container">
       <h1>Consulta de Unidades</h1>
-      <% items.forEach(item =>{ %>
-      <div class="table-striped">
-        <table class="table-striped">
-          <tr>
+
+      <div class="">
+        <table class="table table-striped">
+          <tr class="table-primary">
+            <td>Local</td>
+            <td>Funcionários</td>
+            <td>Ações</td>
+          </tr>
+          <% items.forEach(item =>{ %>
+          <tr class="">
             <td><%= item.local %></td>
             <td><%= item.numeroFuncionarios %></td>
             <td>
-              <a href="/unidades/editar"
-                ><button class="btn btn-warning">editar</button></a
+              <a href="/unidades/editar/<%=item.id %> "
+                ><button class="btn btn-warning" onclick="confirmation(event)">
+                  editar
+                </button></a
+              >
+
+              <a href="/unidades/deletarUnidade/<%=item.id %> "
+                ><button class="btn btn-danger">deletar</button></a
               >
             </td>
-            <td>
-              <a href="/"><button class="btn btn-danger">deletar</button></a>
-            </td>
           </tr>
+          <% })%>
         </table>
       </div>
-
-      <% })%>
     </div>
   </body>
+  <script>
+    function confirmation(e) {}
+  </script>
 </html>

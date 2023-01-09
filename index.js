@@ -244,10 +244,8 @@ app.post('/cadastroProdutos', (req, res) => {
   const descricao = req.body.Idescricao
   const valor = req.body.Ivalor
 
-  console.log(requi)
-
   modelCProdutos.create({
-    descricao: hash,
+    descricao: descricao,
     valor: valor
   })
   console.log('cadastrado com sucesso')
@@ -323,15 +321,43 @@ app.post('/cadastrarUnidade', (req, res) => {
 })
 
 // editar Unidade
-app.get('/unidades/editar', (req, res) => {
+app.get('/unidades/editar/:id', (req, res) => {
+  var id = req.params.id
   var username = ''
   if (req.session.nome) {
     username = req.session.nome
   }
-  res.render('./unidades/editar', { UsernamePag: username })
+  modelUnidades.findOne({ where: { id: id } }).then(data => {
+    res.render('./unidades/editar', { UsernamePag: username, item: data })
+  })
+})
+
+app.post('/editarUnidade', (req, res) => {
+  var local = req.body.Ilocal
+  var NFunc = req.body.InumFunc
+  var id = req.body.Iid
+  modelUnidades
+    .update(
+      {
+        local: local,
+        numeroFuncionarios: NFunc
+      },
+      { where: { id: id } }
+    )
+    .then(res.redirect('/'))
 })
 
 //deletar unidade
+
+app.get('/unidades/deletarUnidade/:id', (req, res) => {
+  var id = req.params.id
+  modelUnidades
+    .destroy({ where: { id: id } })
+    .then(res.redirect('/'))
+    .catch(err => {
+      console.log(err)
+    })
+})
 
 app.listen(port)
 
