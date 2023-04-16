@@ -230,6 +230,20 @@ res.redirect('/')
 }
 })
 })
+   
+   app.get('/pagina',(req, res)=>{
+var valorPesquisa = 'Anderson'
+modelTabela.findOne( {
+where: { nome : valorPesquisa} //Pesquisar na tabela, campo: nome = Anderson
+})
+.then(item => {
+if (item != undefined){ // achou o valor
+res.render('/pagina', { arrayDados: item })
+}else{
+res.redirect('/')
+}
+})
+})
 
 //Model de resposta
 
