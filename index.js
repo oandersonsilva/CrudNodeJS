@@ -1,13 +1,13 @@
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser') //trabalha com os dados vindos dos clientes atraves do form e os transforma em objeto JS dentro do Req.body
-const modelCPessoas = require('./database/modelCPessoas')
-const modelCProdutos = require('./database/modelCProdutos')
+ const bodyParser = require('body-parser') //trabalha com os dados vindos dos clientes atraves do form e os transforma em objeto JS dentro do Req.body
+//  const modelCPessoas = require('./database/modelCPessoas')
+//  const modelCProdutos = require('./database/modelCProdutos')
 
 const session = require('express-session')
 const loginAuth = require('./middlewares/loginAuth')
 const bcrypt = require('bcryptjs')
-const modelUnidades = require('./database/modelUnidades')
+// const modelUnidades = require('./database/modelUnidades')
 
 app.use(bodyParser.urlencoded({ extended: false })) //evita que utilizem campos encadeados
 app.use(bodyParser.json())
@@ -18,9 +18,9 @@ app.use(
   })
 )
 
-port = 3000
-app.use(express.static('public'))
-app.set('view engine', 'ejs')
+ port = 3000
+// app.use(express.static('public'))
+ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
   var username = ''
@@ -304,7 +304,7 @@ app.get('/unidades/consulta', (req, res) => {
 
 app.get('/unidades/cadastro', (req, res) => {
   var username = ''
-  if (req.session.nome) {
+if (req.session.nome) {
     username = req.session.nome
   }
   res.render('./unidades/cadastro', { UsernamePag: username })
