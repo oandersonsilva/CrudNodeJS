@@ -90,7 +90,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 instalar sequelize -> npm install --save sequelize
-para trabalhar com seuqelize -> npm install --save mysql2acessar sequelizze
+para trabalhar com sequelize -> npm install --save mysql2
+
+acessar sequelizze
 
 const Sequelize = require('sequelize')
 

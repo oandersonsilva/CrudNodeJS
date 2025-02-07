@@ -36,8 +36,9 @@ const modelPrincipal = connection.define('principal', {
   }
 })
 
-modelPrincipal.sync({ force: false }).then(() => {
+modelPrincipal.sync({ force: false });
+// .then(() => {
   console.log('tabela.criada')
-})
+// })
 
 module.exports = modelPrincipal

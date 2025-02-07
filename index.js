@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
  const bodyParser = require('body-parser') //trabalha com os dados vindos dos clientes atraves do form e os transforma em objeto JS dentro do Req.body
-//  const modelCPessoas = require('./database/modelCPessoas')
+ const modelCPessoas = require('./database/modelCPessoas')
 //  const modelCProdutos = require('./database/modelCProdutos')
 
 const session = require('express-session')
@@ -17,6 +17,8 @@ app.use(
     cookie: { maxAge: 3000000 }
   })
 )
+
+
 
  port = 3000
 // app.use(express.static('public'))
@@ -105,6 +107,8 @@ app.get('/produtos/consultaAll', (req, res) => {
   })
 })
 
+// Consulta de Pessoas
+
 app.get('/pessoas/consulta', (req, res) => {
   var username = ''
   if (req.session.nome) {
@@ -154,6 +158,8 @@ app.post('/editarPessoa', (req, res) => {
     })
 })
 
+// Atualizando Pessoas escolhidas
+
 app.get('/pessoas/editarPessoa/:id', (req, res) => {
   var username = ''
   if (req.session.nome) {
@@ -177,6 +183,8 @@ app.get('/pessoas/editarPessoa/:id', (req, res) => {
   })
 })
 
+// Deletando produtos
+
 app.post('/deletarProdutos', (req, res) => {
   var id = req.body.id
   modelCProdutos.destroy({ where: { id: id } }).then(() => {
@@ -195,6 +203,8 @@ app.get('/produtos/editar/:id', (req, res) => {
     res.render('./produtos/editar', { item: item, UsernamePag: username })
   })
 })
+
+// Atualização de produtos
 
 app.post('/updateProdutos', (req, res) => {
   var id = req.body.id
@@ -215,6 +225,8 @@ app.post('/updateProdutos', (req, res) => {
       res.redirect('/produtos/consultaAll')
     })
 })
+
+//Cadastro de Pessoas
 
 app.post('/pessoaCadastrada', (req, res) => {
   var nome = req.body.Inome
@@ -358,6 +370,34 @@ app.get('/unidades/deletarUnidade/:id', (req, res) => {
       console.log(err)
     })
 })
+
+// const mysql = require('mysql2')
+
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   password: '1234',
+//   database: 'noticia'
+// })
+
+const Sequelize = require('sequelize')
+const mysql = require('mysql2')
+
+const connection = new Sequelize({
+  dialect: 'mysql',
+  database: 'noticia',
+  user: 'root',
+  password: '1234',
+  host: 'localhost',
+  port: 3306
+})
+
+const modelPrincipal = connection.define('principal', {
+  nome: {
+    type: Sequelize.STRING,
+    allowNULL: false
+  }})
+
 
 app.listen(port)
 
