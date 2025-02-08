@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const connection = require('./database')
 
-const modelPrincipal = connection.define('principal', {
+const modelPrincipal = connection.define('Pessoas', {
   nome: {
     type: Sequelize.STRING,
     allowNULL: false
@@ -36,9 +36,8 @@ const modelPrincipal = connection.define('principal', {
   }
 })
 
-modelPrincipal.sync({ force: false });
-// .then(() => {
-  console.log('tabela.criada')
-// })
+modelPrincipal
+  .sync({ force: false })
+  .then(console.log('tabela de pessoas Criada'))
 
 module.exports = modelPrincipal
