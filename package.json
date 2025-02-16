@@ -19,6 +19,7 @@
   "homepage": "https://github.com/oandersonsilva/CrudNodeJS#readme",
   "dependencies": {
     "@sequelize/mysql": "^7.0.0-alpha.44",
+    "@tailwindcss/cli": "^4.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "bootstrap": "^5.2.0",
@@ -27,6 +28,7 @@
     "express-session": "^1.17.3",
     "mysql2": "^3.12.0",
     "nodemon": "^3.1.9",
-    "sequelize": "^6.37.5"
+    "sequelize": "^6.37.5",
+    "tailwindcss": "^4.0.6"
   }
 }
