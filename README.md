@@ -1,2 +1,2 @@
 
-Sistema CRUD feito com a linguagem JS e NodeJS
+CRUD feito com NodeJS
