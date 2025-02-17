@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser') //trabalha com os dados vindos dos clientes atraves do form e os transforma em objeto JS dentro do Req.body
-const modelCPessoas = require('./database/modelCPessoas')
-const modelCProdutos = require('./database/modelCProdutos')
+const modelPessoas = require('./database/modelPessoas')
+const modelProdutos = require('./database/modelProdutos')
 
 const session = require('express-session')
 const loginAuth = require('./middlewares/loginAuth')
@@ -28,10 +28,10 @@ var rotaIndex = require('./routes/index')
 rotaIndex(app)
 
 var rotaPessoas = require('./routes/pessoas')
-rotaPessoas(app, loginAuth, modelCPessoas);
+rotaPessoas(app, loginAuth, modelPessoas);
 
 var rotaProdutos = require('./routes/produtos')
-rotaProdutos(app, loginAuth, modelCProdutos)
+rotaProdutos(app, loginAuth, modelProdutos)
 
 var rotaUnidades = require('./routes/unidades')
 rotaUnidades(app, loginAuth, modelUnidades)
@@ -85,10 +85,6 @@ app.get('/plataforma', (req, res) => {
         res.send('Bem vindo à Plataforma')
     }
 })
-
-
-
-
 
 app.listen(port)
 

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const connection = require('./database')
 
-const modelCProdutos = connection.define('Produtos', {
+const modelProdutos = connection.define('Produtos', {
   descricao: {
     type: Sequelize.TEXT,
     allowNULL: false
@@ -12,8 +12,8 @@ const modelCProdutos = connection.define('Produtos', {
   }
 })
 
-modelCProdutos
+modelProdutos
   .sync({ force: false })
   .then(console.log('tabela de produtos Criada'))
 
-module.exports = modelCProdutos
+module.exports = modelProdutos
