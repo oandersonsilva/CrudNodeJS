@@ -28,7 +28,7 @@ var rotaIndex = require('./routes/index')
 rotaIndex(app)
 
 var rotaPessoas = require('./routes/pessoas')
-rotaPessoas(app, loginAuth, modelPessoas);
+rotaPessoas(app, loginAuth, modelPessoas());
 
 var rotaProdutos = require('./routes/produtos')
 rotaProdutos(app, loginAuth, modelProdutos)

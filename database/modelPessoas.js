@@ -64,19 +64,15 @@ Pessoas.prototype.cadastro = function(pessoa, callback){
 }
 
 Pessoas.prototype.getAll = function(){
-  // console.log('pesquisei')
-  // _model
-  //           .findAll({raw: true})
-  //           .then(item => {
-  //               if (item != undefined) {
-  //                   res.render('../views/pessoas/consulta', {
-  //                       variavel: item,
-  //                       UsernamePag: username
-  //                   })
-  //               } else {
-  //                   res.redirect('../')
-  //               }
-  //           })
+  console.log('Consulta')
+
+  this._model
+            .findAll({raw: true})
+            .then(item => {
+              //console.log(item)
+              return item 
+
+            })
 
 
 }

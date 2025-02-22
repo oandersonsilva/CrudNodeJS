@@ -161,8 +161,22 @@ application.post('/pessoaCadastrada', (req, res) => {
 
         
         var p = new tablePessoas
-        console.log(p)
-        res.redirect('/')
+        console.log(p._num)
+        let item = p.getAll()
+        console.log(item)
+        if (item != undefined) {
+            
+            res.render('pessoas/consulta', {
+                variavel: item,
+                UsernamePag: username
+            })
+        } else {
+            //res.redirect('../')
+        }
+        
+
+
+
 
 
 
