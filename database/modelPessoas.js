@@ -49,34 +49,34 @@ function Pessoas(){
 
 Pessoas.prototype.cadastro = function(pessoa, callback){
   // cadastro na tabela
-  _model.create({
-    nome: pessoa.nome,
-    email: pessoa.email,
-    sobrenome: pessoa.sobrenome,
-    data: pessoa.data,
-    telefone: pessoa.telefone,
-    estado: pessoa.estado,
-    username: pessoa.username,
-    senha: pessoa.senha
-  })
+  // _model.create({
+  //   nome: pessoa.nome,
+  //   email: pessoa.email,
+  //   sobrenome: pessoa.sobrenome,
+  //   data: pessoa.data,
+  //   telefone: pessoa.telefone,
+  //   estado: pessoa.estado,
+  //   username: pessoa.username,
+  //   senha: pessoa.senha
+  // })
 
-  callback()
+  // callback()
 }
 
 Pessoas.prototype.getAll = function(){
-  console.log('pesquisei')
-  _model
-            .findAll({raw: true})
-            .then(item => {
-                if (item != undefined) {
-                    res.render('../views/pessoas/consulta', {
-                        variavel: item,
-                        UsernamePag: username
-                    })
-                } else {
-                    res.redirect('../')
-                }
-            })
+  // console.log('pesquisei')
+  // _model
+  //           .findAll({raw: true})
+  //           .then(item => {
+  //               if (item != undefined) {
+  //                   res.render('../views/pessoas/consulta', {
+  //                       variavel: item,
+  //                       UsernamePag: username
+  //                   })
+  //               } else {
+  //                   res.redirect('../')
+  //               }
+  //           })
 
 
 }

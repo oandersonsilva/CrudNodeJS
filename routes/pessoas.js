@@ -161,7 +161,8 @@ application.post('/pessoaCadastrada', (req, res) => {
 
         
         var p = new tablePessoas
-        p.getAll()
+        console.log(p)
+        res.redirect('/')
 
 
 
