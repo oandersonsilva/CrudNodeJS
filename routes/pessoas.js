@@ -157,42 +157,22 @@ application.post('/pessoaCadastrada', (req, res) => {
             username = req.session.nome
         }
 
-        var varId = '1'
-
-        
         var p = new tablePessoas
         console.log(p._num)
-        let item = p.getAll()
-        console.log(item)
-        if (item != undefined) {
-            
-            res.render('pessoas/consulta', {
-                variavel: item,
-                UsernamePag: username
-            })
-        } else {
-            //res.redirect('../')
-        }
-        
+        p.getAll().then(item =>{
+            if (item != undefined) {
+                    res.render('pessoas/consulta', {
+                        variavel: item,
+                        UsernamePag: username
+                    })
+                } else {
+                    res.redirect('../')
+                }
 
 
+        })
 
 
-
-
-
-        // tablePessoas
-        //     .findAll({raw: true})
-        //     .then(item => {
-        //         if (item != undefined) {
-        //             res.render('../views/pessoas/consulta', {
-        //                 variavel: item,
-        //                 UsernamePag: username
-        //             })
-        //         } else {
-        //             res.redirect('../')
-        //         }
-        //     })
     })
 
     

@@ -63,17 +63,10 @@ Pessoas.prototype.cadastro = function(pessoa, callback){
   // callback()
 }
 
-Pessoas.prototype.getAll = function(){
-  console.log('Consulta')
+ Pessoas.prototype.getAll = async function(){
 
-  this._model
-            .findAll({raw: true})
-            .then(item => {
-              //console.log(item)
-              return item 
-
-            })
-
+  let item = await this._model.findAll({raw: true})
+  return item
 
 }
 
